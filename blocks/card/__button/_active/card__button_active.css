@@ -1,0 +1,4 @@
+.card.card_active .card__button {
+    background-image: url(../../../../images/Cancel.svg);
+    background-color: #5CCE7C;
+}

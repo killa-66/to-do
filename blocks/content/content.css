@@ -1,0 +1,11 @@
+.content {
+    display: flex;
+    margin: 225px 60px 0;
+    max-width: 100vw;
+}
+
+@media (max-width: 1050px) {
+    .content {
+        flex-direction: column;
+    }
+}

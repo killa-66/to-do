@@ -1,0 +1,101 @@
+let array1 = [1,1,1,1,1] 
+for(let i = 0; i  < array1.length; i++) {
+	array[i] = "text";
+}
+let t = 0, array2 = [1,1,1,1,1];
+
+
+while(t < array2.length) {
+	array2[t] = "text";
+	t++
+}
+console.log(array2)
+
+let array3 = [1,1,1,1,1];
+
+array3.foreach((elem, i) => {
+//i - позиция элемента в массиве
+//elem - элемент массива
+	elem = "text";
+	console.log(elem);
+	array3[i] = "text";
+});
+console.log(array3);
+
+*******************
+
+
+--- После загрузки страницы ---
+	Получаем JSON объект из LocalStorage.getItem('todoList_tasks') и декодируем его из строки в объект с помощью функции JSON.parse
+		и заносим в него новый элемент с помощью функции
+	
+	Этот JSON объект имеет следующую структуру
+	json_object = {[
+		{
+			"id": 1,
+			"name": "Помыть посуду" (string)
+			"description": "Помыть ложки" (string)
+			"state": 1 - включено / 2 - выполнено / 3 - удалено (int)
+		},
+		{
+			"id": 2, //уникальный ID (int)
+			"name": "Помыть посуду #2" (string)
+			"description": "Помыть тарелки" (string)
+			"state": 1 - включено / 2 - выполнено / 3 - удалено (int)
+		},
+	]}
+	
+	Затем нам надо отсортировать объект с помощью функции json_object.sort((a, b) => {return a.state - b.state})
+	После этого удаляем значения из массифа с помощью функции json_object.filter(e => {e.state != 3})
+	
+	С помощью цикла json_object.foreach проходимся по всему объекту
+		А внутри цикла добавляем элементы на страницу в section class="cards с помощью appendChild
+	
+--- END ---
+
+
+--- Добавление нового блока ---
+
+
+	Форма - 2 поля
+	Название и описание
+	Отправить - кнопка которое запускает событие обработчик формы
+
+	Обработчик формы
+	Получает данные из инпутов (value)
+	Если оба инпута заполнены мы проходим дальше if(!!document.getElementById(title).value || !!document.getElementById(description).value)
+
+	Т.к. при пустом значении document.getElementById(title).value. В Value будет храниться значеие пустой строки (''). При первой итерации "не" (операция - !)
+	мы полчим true, соответственно инвертируем это значение ещё одной операцией "не" получаем false.
+	Таким образом для случаев когда инпут заполнен мы будем получать true в условии.
+	
+	let titleTask = document.getElementById(title).value;
+	let descTask = document.getElementById(description).value;
+	if (true) {
+		Теперь нам нужно добавить новый элемент в наш JSON
+
+		Получаем JSON объект из LocalStorage.getItem('todoList_tasks') и декодируем его из строки в объект с помощью функции JSON.parse
+		и заносим в него новый элемент с помощью функции
+
+
+		Получаем последний элемент наших тасков
+
+		let taskElements = document.querySelectorAll('.cards');
+		let lastChildTaskElement = taskElements[taskElements.length - 1];
+		let dataLastChildTask = lastChildTaskElement.dataset(task);
+		```
+		json_object.push({
+			"id": dataLastChildTask + 1,
+			"name": titleTask
+			"description": descTask
+			"state": 1
+		});
+		```
+
+		Дальше нам нужно "запомнить" новый JSON объект в LocalStorage с помощью функции LocalStorage.setItem('todoList_tasks', JSON.stringify(json_object))
+		
+	}
+
+	
+
+--- END ---
